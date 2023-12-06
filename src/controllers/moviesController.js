@@ -9,7 +9,8 @@ const moviesController = {
     list: async (req, res) => {
 
         try {
-            const { movies, total } = await getAllMovies(req.query.limit, req.skip) // limit y offset
+            const {keyword} = req.query;
+            const { movies, total } = await getAllMovies(req.query.limit, req.skip ,keyword) // limit y offset
             const pagesCount = Math.ceil(total / req.query.limit) // me da las cantidad de paginas que tendre segun la cantidad de elementos
             const currentPage = req.query.page //numero de pagina actual
             const pages = paginate.getArrayPages(req)(pagesCount, pagesCount, currentPage) // un array de todas las paginas disponibles
